@@ -51,7 +51,7 @@ namespace WhatFlix.Api
 
             }
             else{
-                app.UseStatusCodePagesWithRedirects("/Error/StatusHandler");
+                app.UseStatusCodePagesWithReExecute("/Error/StatusHandler");
             }
             //app
             app.UseHttpsRedirection();
