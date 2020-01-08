@@ -15,25 +15,38 @@ namespace WhatFlix.Api
 {
     public class Program
     {
+        // public static void Main(string[] args)
+        // {
+        //     //CreateHostBuilder(args).Build().Run();
+        //     WhatFlix.DataAccessLayer.Cache.Seed();
+
+        //     var host = CreateHostBuilder(args).Build();//.Run();
+        //     using (var scope = host.Services.CreateScope())
+        //     using (var context = scope.ServiceProvider.GetService<MovieContext>())
+        //     {
+        //         context.Database.EnsureCreated();
+        //     }
+        //     host.Run();
+        // }
         public static void Main(string[] args)
         {
-            //CreateHostBuilder(args).Build().Run();
-                    WhatFlix.DataAccessLayer.Cache.Seed();
-
-            var host = CreateHostBuilder(args).Build();//.Run();
-            using(var scope = host.Services.CreateScope())
-            using(var context = scope.ServiceProvider.GetService<MovieContext>())
+            WhatFlix.DataAccessLayer.Cache.Seed();
+            var host = CreateWebHostBuilder(args).Build();
+            using (var scope = host.Services.CreateScope())
+            using (var context = scope.ServiceProvider.GetService<MovieContext>())
             {
                 context.Database.EnsureCreated();
             }
             host.Run();
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+                    WebHost.CreateDefaultBuilder(args)
+                        .UseStartup<Startup>();
+        // public static IWebHostBuilder CreateHostBuilder(string[] args) =>
+        //     Host.CreateDefaultBuilder(args)
+        //         .ConfigureWebHostDefaults(webBuilder =>
+        //         {
+        //             webBuilder.UseStartup<Startup>();
+        //         });
     }
 }

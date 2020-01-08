@@ -11,7 +11,6 @@ using WhatFlix.Common;
 using System.Data.Common;
 using WhatFlix.Api.Model;
 using CsvHelper;
-using System.Data.Entity;
 
 namespace WhatFlix.DataAccessLayer
 {
