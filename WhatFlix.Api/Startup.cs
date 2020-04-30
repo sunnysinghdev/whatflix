@@ -15,7 +15,8 @@ using Microsoft.EntityFrameworkCore.InMemory;
 //using FileContextCore;
 using WhatFlix.DataAccessLayer;
 using WhatFlix.Common;
-
+//using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 namespace WhatFlix.Api
 {
     public class Startup
@@ -36,6 +37,10 @@ namespace WhatFlix.Api
             //options.UseModel(Cache.Movies_cache);
             options.UseInMemoryDatabase("sunny");
             });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo  { Title = "Awesome API", Version = "v1" });
+            });
             services.AddScoped<IMovieRepositry, MovieRepository>();
             services.AddScoped<ICreditRepository, CreditRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -47,20 +52,22 @@ namespace WhatFlix.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseStatusCodePagesWithReExecute("/Error/StatusHandler");
+                //app.UseStatusCodePagesWithReExecute("/Error/StatusHandler");
 
             }
             else{
-                app.UseStatusCodePagesWithReExecute("/Error/StatusHandler");
+                //app.UseStatusCodePagesWithReExecute("/Error/StatusHandler");
             }
             //app
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             //----------index.html-----------------
             app.UseDefaultFiles();
             app.UseStaticFiles();
-        
+
+           
+
             //-------------------------------------
-            
+
             app.UseMvc();
             //app.UseRouting();
 
@@ -70,6 +77,13 @@ namespace WhatFlix.Api
             // {
             //     endpoints.MapControllers();
             // });
+            //Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
         }
     }
 }
