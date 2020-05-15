@@ -1,26 +1,26 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using WhatFlix.Common;
 
-namespace WhatFlix.DataAccessLayer
+using WhatFlix.Persistance;
+
+namespace DataAccessLayer.WhatFlix
 {
     public class UnitOfWork : IUnitOfWork
     {
         public ICreditRepository Credits { get; }
 
         public IMovieRepositry Movies { get; }
-
-        public UnitOfWork(IMovieRepositry _movies, ICreditRepository _credits)
+        
+        private MovieContext context;
+        public UnitOfWork(MovieContext context)
         {
             //Credits = _credit;
-            Movies = _movies;
-            Credits = _credits;
+            this.context = context;
+            Movies = new MovieRepository(context);
+            Credits = new CreditRepository(context);
             //Movies = new MovieRepository(context);
         }
         public void Dispose()
         {
+            this.context.SaveChanges();
             //throw new NotImplementedException();
         }
     }

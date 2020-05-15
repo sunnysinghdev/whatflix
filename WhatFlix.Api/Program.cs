@@ -9,8 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using WhatFlix.DataAccessLayer;
-
 namespace WhatFlix.Api
 {
     public class Program
@@ -30,10 +28,10 @@ namespace WhatFlix.Api
         // }
         public static void Main(string[] args)
         {
-            WhatFlix.DataAccessLayer.Cache.Seed();
+            DataAccessLayer.WhatFlix.Cache.Seed();
             var host = CreateWebHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
-            using (var context = scope.ServiceProvider.GetService<MovieContext>())
+            using (var context = scope.ServiceProvider.GetService<DataAccessLayer.WhatFlix.MovieContext>())
             {
                 context.Database.EnsureCreated();
             }

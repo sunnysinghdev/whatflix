@@ -13,10 +13,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory;
 //using FileContextCore;
-using WhatFlix.DataAccessLayer;
-using WhatFlix.Common;
-//using Swashbuckle.AspNetCore.Swagger;
+
 using Microsoft.OpenApi.Models;
+
 namespace WhatFlix.Api
 {
     public class Startup
@@ -24,6 +23,12 @@ namespace WhatFlix.Api
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //foreach(var keyval in configuration.AsEnumerable()){
+                //Console.WriteLine("{0} > {1}",keyval.Key, keyval.Value );
+            //}
+            //foreach(var keyval in Configuration){
+                //Console.WriteLine("{0} > {1}",Configuration["AzureCosmosDB:EndPointUrl"], Configuration["AzureCosmosDB:PrimaryKey"] );
+            //}
         }
 
         public IConfiguration Configuration { get; }
@@ -33,7 +38,7 @@ namespace WhatFlix.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             //services.AddControllers();
-            services.AddDbContextPool<MovieContext>(options => {
+            services.AddDbContextPool<DataAccessLayer.WhatFlix.MovieContext>(options => {
             //options.UseModel(Cache.Movies_cache);
             options.UseInMemoryDatabase("sunny");
             });
@@ -41,9 +46,11 @@ namespace WhatFlix.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo  { Title = "Awesome API", Version = "v1" });
             });
-            services.AddScoped<IMovieRepositry, MovieRepository>();
-            services.AddScoped<ICreditRepository, CreditRepository>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //services.AddScoped<ICovid19DbContext, Covid19DbContext>();
+            services.AddScoped<Persistance.IMovieRepositry, DataAccessLayer.WhatFlix.MovieRepository>();
+            services.AddScoped<Persistance.ICreditRepository, DataAccessLayer.WhatFlix.CreditRepository>();
+            services.AddScoped<Persistance.IUnitOfWork, DataAccessLayer.WhatFlix.UnitOfWork>();
+            services.AddScoped<Service.IMovieService, Service.MovieService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

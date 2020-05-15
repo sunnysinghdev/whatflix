@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-namespace WhatFlix.Common
+namespace Covid19.Repository
 {
 
     public interface IUnitOfWork : IDisposable
     {
-        ICreditRepository Credits { get; }
-        IMovieRepositry Movies { get; }
+        ILocationRepository Locations { get; set; }
     }
 }

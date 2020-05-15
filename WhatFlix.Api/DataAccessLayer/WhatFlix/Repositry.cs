@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using WhatFlix.Common;
+using WhatFlix.Persistance;
 
-namespace WhatFlix.DataAccessLayer
+namespace DataAccessLayer.WhatFlix
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {

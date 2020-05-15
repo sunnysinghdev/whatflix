@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 //using Newtonsoft.Json;
-using WhatFlix.Api.Model;
+using WhatFlix.Domain.Model;
 
 
 namespace WhatFlix.Api.Controllers

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CsvHelper;
-using WhatFlix.Api.Model;
+using WhatFlix.Domain.Model;
 using Newtonsoft.Json;
 
-namespace WhatFlix.DataAccessLayer
+namespace DataAccessLayer.WhatFlix
 {
     public class Cache
     {

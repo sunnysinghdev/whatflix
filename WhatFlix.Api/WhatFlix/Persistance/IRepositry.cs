@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace WhatFlix.Common
+namespace WhatFlix.Persistance
 {
 
     public interface IRepository<TEntity> where TEntity : class

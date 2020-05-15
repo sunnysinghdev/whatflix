@@ -7,16 +7,16 @@ using System.Data.OleDb;
 using System.Data;
 using System.Text;
 using System.Collections.Generic;
-using WhatFlix.Common;
 using System.Data.Common;
-using WhatFlix.Api.Model;
+using WhatFlix.Domain.Model;
+using WhatFlix.Persistance;
 using CsvHelper;
 
-namespace WhatFlix.DataAccessLayer
+namespace DataAccessLayer.WhatFlix
 {
     public class MovieRepository : Repository<Movie>, IMovieRepositry
     {
-        MovieContext _context;
+        private MovieContext _context;
         public MovieRepository(MovieContext context):base(context)
         {
             _context = context;

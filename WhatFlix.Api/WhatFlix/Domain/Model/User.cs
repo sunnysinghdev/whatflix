@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-namespace WhatFlix.Api.Model
+namespace WhatFlix.Domain.Model
 {
     public class User {
         public int Id {get; set;}

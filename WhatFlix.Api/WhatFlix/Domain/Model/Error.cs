@@ -1,4 +1,4 @@
-namespace WhatFlix.Api.Model
+namespace WhatFlix.Domain.Model
 {
     public class Error {
         public int Status {get; set;}

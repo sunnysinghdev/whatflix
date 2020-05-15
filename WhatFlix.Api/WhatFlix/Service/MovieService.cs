@@ -1,13 +1,12 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using WhatFlix.Common;
-using WhatFlix.DataAccessLayer;
-using WhatFlix.Api.Model;
+using WhatFlix.Persistance;
+using WhatFlix.Domain.Model;
 
-namespace WhatFlix.Services
+namespace WhatFlix.Service
 {
-    public class MovieService
+    public class MovieService : IMovieService
     {
         private IUnitOfWork unitOfWork;
         public MovieService(IUnitOfWork unitOfWork)
@@ -23,19 +22,19 @@ namespace WhatFlix.Services
             var movies = unitOfWork.Movies.GetAll().ToArray();
             var credits = unitOfWork.Credits.GetAll().ToArray();
             var l = (from movie in movies
-                    join credit in credits on movie.Id equals credit.Id
-                    where movie.Title.ToLower().Contains(text.ToLower()) || 
-                    credit.ActorName.ToLower().Contains(text.ToLower()) ||
-                    credit.DirectorName.ToLower().Contains(text.ToLower())
-                    select new
-                    {
-                        Id = movie.Id,
-                        Name = movie.Title,
-                        Actor = credit.ActorName,
-                        Director = credit.DirectorName
+                     join credit in credits on movie.Id equals credit.Id
+                     where movie.Title.ToLower().Contains(text.ToLower()) ||
+                     credit.ActorName.ToLower().Contains(text.ToLower()) ||
+                     credit.DirectorName.ToLower().Contains(text.ToLower())
+                     select new
+                     {
+                         Id = movie.Id,
+                         Name = movie.Title,
+                         Actor = credit.ActorName,
+                         Director = credit.DirectorName
 
-                    });
-                    //Console.WriteLine(l.ToString());
+                     });
+            //Console.WriteLine(l.ToString());
             return l;
         }
         // public IEnumerable<Object> GetUserPreferences(){

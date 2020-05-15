@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using CsvHelper.Configuration.Attributes;
-using WhatFlix.Common;
-namespace WhatFlix.Api.Model
+
+namespace WhatFlix.Domain.Model
 {
     //285,
     //Pirates of the Caribbean: At World's End,

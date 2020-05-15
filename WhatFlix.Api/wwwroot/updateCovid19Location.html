@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WhatFlix =</title>
+    </head>
+    <body>
+        <h1>Update Covid19 Location</h1>
+        <form method="POST" action="covid19/location">
+            <label>Zipcode</label>
+            <input type="text" name="zipcode" value="560076"/>
+            <br>
+            <label>Zone (green 0, orange 1, red  3)</label>
+            <input type="text" name="zone" value="0"/>
+            <br>
+            <label>Number of cases</label>
+            <input type="text" name="cases"/>
+            <br>
+            <label>Area</label>
+            <input type="text" name="area"/>
+            <br>
+            <label>City</label>
+            <input type="text" name="city" value="bengaluru"/>
+            <br>
+            <label>State</label>
+            <input type="text" name="state" value="karnataka"/>
+            <br>
+            <label>Country</label>
+            <input type="text" name="country" value="india"/>
+            <br>
+            <label>Street 1</label>
+            <input type="text" name="streets[0]" value="street 1"/>
+            <label>Street 2</label>
+            <input type="text" name="streets[1]" value="street 2"/>
+            <br>
+            <button type="submit">Update Location</button>
+        
+        </form>
+    </body>
+</html>

@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-//using Newtonsoft.Json;
-using WhatFlix.Api.Model;
-using WhatFlix.Common;
+using WhatFlix.Service;
 
 namespace WhatFlix.Api.Controllers
 {
@@ -14,36 +12,49 @@ namespace WhatFlix.Api.Controllers
     [Route("movies")]
     public class MovieController : ControllerBase
     {
-        private readonly ILogger<ErrorController> _logger;
-        private IUnitOfWork unitOfWork;
-        public MovieController(ILogger<ErrorController> logger, IUnitOfWork ut)
+        public static int counter = 0;//it gets initialized every time.
+        private readonly ILogger<MovieController> _logger;
+        //private IUnitOfWork unitOfWork;
+        private IMovieService movieService;
+        //UnitOfWork is instanciated using Dependency Injection;
+        public MovieController(IMovieService movieService, ILogger<MovieController> logger)
         {
             _logger = logger;
-            unitOfWork = ut;
+            this.movieService = movieService;
         }
         [HttpGet("users")]
         public JsonResult Get()
         {
             //Console.WriteLine("oooo");
 
-            string s="Fail";//
-            using(StreamReader sr = new StreamReader("wwwroot/user_preferences.json")){
+            string s = "Fail";//
+            using (StreamReader sr = new StreamReader("wwwroot/user_preferences.json"))
+            {
                 s = sr.ReadToEnd();
-                
+
             }
-            _logger.Log(LogLevel.Information, "H1");
+            _logger.Log(LogLevel.Information, "H1: You are using logging feature.");
             return new JsonResult(s);
         }
         [HttpGet("user/{id:int}/search")]
         public IEnumerable<Object> Search(int id, string text)
         {
             string val = text;
+            counter++;
             Console.WriteLine(val);
-            var l = new WhatFlix.Services.MovieService(unitOfWork);
-            return l.GetAllMovie(text);
-            
+            _logger.LogWarning("Request num{0} >"+counter , val);
+            // _logger.LogError("LogError");
+            // _logger.LogInformation("LogInformation");
+            // _logger.LogDebug("LogDebug");
+            // _logger.LogTrace("LogTrace");
+            // _logger.LogCritical("LogCritical");
+            //var l = new WhatFlix.Service.MovieService(this.unitOfWork);
+            return movieService.GetAllMovie(text);
+
             //return string.Format("user id = {0}, search string={1}",id, val);
         }
-        
+
     }
+
+
 }

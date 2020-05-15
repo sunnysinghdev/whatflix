@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using WhatFlix.Api.Model;
+using WhatFlix.Domain.Model;
 
-namespace WhatFlix.Common
+namespace WhatFlix.Persistance
 {
 
 public interface ICreditRepository : IRepository<Credit>

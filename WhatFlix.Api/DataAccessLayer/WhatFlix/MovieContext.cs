@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CsvHelper;
-using WhatFlix.Api.Model;
+using WhatFlix.Domain.Model;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 //using FileContextCore;
 
-namespace WhatFlix.DataAccessLayer
+namespace DataAccessLayer.WhatFlix
 {
     public class MovieContext : DbContext
     {
