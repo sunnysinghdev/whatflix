@@ -15,3 +15,4 @@ services.AddSwaggerGen(c =>
         c.SwaggerDoc("v1", new OpenApiInfo  { Title = "Awesome API", Version = "v1" });
     });
 ```
+azure deploy
